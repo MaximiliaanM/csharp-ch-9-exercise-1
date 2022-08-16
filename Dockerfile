@@ -11,7 +11,7 @@ WORKDIR /
 COPY ./SportStore.sln ./
 COPY ./src/Domain/Domain.csproj ./src/Domain/
 COPY ./src/Services/Services.csproj ./src/Services/
-
+COPY ./src/Persistence/Persistence.csproj ./src/Persistence/
 COPY ./src/Server/Server.csproj ./src/Server/
 COPY ./src/Shared/Shared.csproj ./src/Shared/
 COPY ./src/Client/Client.csproj ./src/Client/
@@ -21,6 +21,7 @@ RUN dotnet restore
 COPY ./ ./
 COPY ./src/Domain/ ./src/Domain/
 COPY ./src/Services/ ./src/Services/
+COPY ./src/Persistence/ ./src/Persistence/
 COPY ./src/Server/ ./src/Server/
 COPY ./src/Shared/ ./src/Shared/
 COPY ./src/Client/ ./src/Client/
@@ -29,6 +30,8 @@ COPY ./src/Client/ ./src/Client/
 WORKDIR /src/Domain
 RUN dotnet build -c Release -o /app/out
 WORKDIR /src/Services
+RUN dotnet build -c Release -o /app/out
+WORKDIR /src/Persistence
 RUN dotnet build -c Release -o /app/out
 WORKDIR /src/Server
 RUN dotnet build -c Release -o /app/out
